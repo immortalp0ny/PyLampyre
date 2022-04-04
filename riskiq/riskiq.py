@@ -273,7 +273,7 @@ def normalize_asn(asn):
 ########################################################################################
 
 def provide_domain_resolutions(hostname, sink, logger, params):
-    
+    """ Provide information about history of domain resolves """
     for resolution in hostname.resolutions:        
         if resolution.resolvetype == PDNS_RESOLVE_TYPE_IP:
             ip_str = resolution.resolve
@@ -372,6 +372,7 @@ def provide_domain_resolutions(hostname, sink, logger, params):
 
 
 def provide_ip_resolutions(ip, sink, logger, params):
+    """ Provide information about history of IP resolves """
     domains = []
 
     cached = load_line(DomainResolve, ip.ip) 
@@ -406,6 +407,7 @@ def provide_ip_resolutions(ip, sink, logger, params):
 
 
 def provide_certificates(ip, sink, logger, params):
+    """ Provide information about history of SSL certificates which were discovered """
     for cert in ip.certificates:
         line = IpCertificateInfo.create_empty()
         line[IpCertificateInfo.Ip]           = ip.ip
@@ -450,6 +452,7 @@ def provide_certificates(ip, sink, logger, params):
 
 
 def provide_components(ip, sink, logger, params):
+    """ Provide information about history of recognized services """
     for comp in ip.components:
         line = ComponentInfo.create_empty()
         line[ComponentInfo.Ip] = ip.ip
@@ -462,6 +465,7 @@ def provide_components(ip, sink, logger, params):
 
 
 def provide_cookies(ip, sink, logger, params):
+    """ Provide information about history of cookies """
     for cookie in ip.cookies:
         line = CookieInfo.create_empty()
         line[CookieInfo.Ip] = ip.ip
@@ -474,6 +478,7 @@ def provide_cookies(ip, sink, logger, params):
 
 
 def provide_subdomains(hostname, sink, logger, params):
+    """ Provide list of subdomains for domain """
     subdomains = []
     for subdomain in hostname.subdomains:
         fqdn = subdomain.fqdn
@@ -489,7 +494,7 @@ def provide_subdomains(hostname, sink, logger, params):
 
 
 def provide_whois_contact_info(hostname, contact, whois_record, sink, logger, params):
-
+    """ Provide information about registrant """
     if params.enable_predefined_email_filters and contact.email.value and not is_valid_email(contact.email.value):
         return
 
@@ -512,6 +517,7 @@ def provide_whois_contact_info(hostname, contact, whois_record, sink, logger, pa
 
 
 def provide_whois(hostname, sink, logger, params):
+    """ Provide information about registrant """
     emails = []
     for whois_record in hostname.whois_history:
             
