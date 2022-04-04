@@ -4,4 +4,4 @@ Collection of python scripts for automating tasks via [Lampyre](https://lampyre.
 
 List of scripts:
 
-    1. [RiskIQ](./riskiq/)
+    1. [RiskIQ](riskiq/README.md)
