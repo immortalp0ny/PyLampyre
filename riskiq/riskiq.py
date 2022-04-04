@@ -1,7 +1,4 @@
 import re
-import secrets
-from telnetlib import IP
-import redis
 import pickle
 import requests
 import ipaddress
